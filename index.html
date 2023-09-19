@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Email Extractor</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@200;700&family=Roboto:wght@300&display=swap"
+        rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <section class="container whole text-center bg-body-tertiary mt-5 mb-5">
+        <div class="row">
+            <div class="col-md-12 mt-5">
+                <h1 class="text-center">Password Checker App</h1>
+                <p class="mx-4">This app could help you build a strong password, in order to protect yourself from hackers. To use this app you must use at least one uppercase and lowercase letter, one special character and minimum of eight characters to compose a <strong>strong</strong> password.</p>
+                
+                <p class="fw-bold">Please input your password in the space provided below: </p>
+            </div>
+        </div>
+   
+
+    
+        <div class="row center">
+            <div class="col-md-8 ">
+                
+               <form>
+                    <label for="psw">Password</label>
+                    <input type="password" id="psw">
+                    <p id="displaykit"></p>
+
+                    <button id="checker">submit</button>
+                </form>
+                
+            </div>
+        </div>
+    </section>
+    <script>
+
+        let displaykit = document.getElementById("displaykit")
+        let checker = document.getElementById("checker");
+        let myInput = document.getElementById("psw");
+
+        checker.addEventListener("click", check);
+
+        function check(e) {
+            e.preventDefault();
+            
+            let pattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*\W).{8,}$/;
+            let password = myInput.value;
+            let patternA = /[a-z]+/g;
+            let patternB = /[A-Z]+/g;
+            let patternC = /[0-9]+/g;
+            if (password.length < 8) {
+                displaykit.innerHTML = "Enter more than 8 caracters";
+            } else {
+                if (pattern.test(password) == false) {
+
+                    if (patternA.test(password)) {
+                        displaykit.innerHTML = " only lowercase is not allowed";
+                    } else if (patternB.test(password)) {
+                        displaykit.innerHTML = "only capital letter is not allowed";
+                    } else if(patternC.test(password)){
+                        displaykit.innerHTML = "only numbers are not allowed"
+                    }
+                    
+                } else {
+                    displaykit.innerHTML = "nice one, you are good to go! strong password";
+                }
+            }
+
+        }
+        
+    </script>
+
+</body>
+
+</html>
